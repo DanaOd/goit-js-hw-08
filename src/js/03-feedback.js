@@ -12,6 +12,8 @@ refs.form.addEventListener('input', onInputHandler);
 const LOCAL_KEY = "feedback-form-state";
 const formData = {};
 
+//TO-DO В противном случае поля должны быть пустыми.
+
 if (localStorage.getItem(LOCAL_KEY)){
    const parsedData =  JSON.parse(localStorage.getItem(LOCAL_KEY));
    console.log(parsedData);
