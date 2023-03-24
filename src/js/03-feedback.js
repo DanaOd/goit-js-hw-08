@@ -1,24 +1,30 @@
+import throttle from "lodash.throttle";
+
 const refs = {
     form: document.querySelector(".feedback-form"),
     email: document.querySelector('[name="email"]'),
     message: document.querySelector('[name="message"]'),
-    button: document.querySelector('[type="submit"]'),
 }
 
-// console.log(refs.form, refs.email, refs.message, refs.button);
-
-refs.form.addEventListener('input', onInputHandler);
+refs.form.addEventListener('input', throttle(onInputHandler, 500));
 
 const LOCAL_KEY = "feedback-form-state";
 const formData = {};
 
-//TO-DO В противном случае поля должны быть пустыми.
 
+// При перезагрузці сторінки витягую в інпути дані з local storage
 if (localStorage.getItem(LOCAL_KEY)){
-   const parsedData =  JSON.parse(localStorage.getItem(LOCAL_KEY));
-   console.log(parsedData);
-   refs.email.value = parsedData.email;
-   refs.message.value = parsedData.message;
+    const parsedData =  JSON.parse(localStorage.getItem(LOCAL_KEY));
+    console.log(parsedData);
+    
+    // В противном случае поля должны быть пустыми.
+   if (parsedData.email){
+       refs.email.value = parsedData.email;
+   }
+
+   if (parsedData.message){
+       refs.message.value = parsedData.message;
+   }
 }
 
 function onInputHandler (event){
@@ -31,6 +37,7 @@ function onInputHandler (event){
 
 refs.form.addEventListener('submit', onSubmitHandler);
 
+// При submit форми очищаю поля та сторедж
 function onSubmitHandler (event){
     event.preventDefault();
     event.currentTarget.reset();
