@@ -57,4 +57,6 @@ function onSubmitHandler (event){
     if (localStorage.getItem(LOCAL_KEY)){
         localStorage.removeItem(LOCAL_KEY);
     }
+    formData.email = "";
+    formData.message = "";
 }
