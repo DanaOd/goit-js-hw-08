@@ -37,6 +37,18 @@ function onInputHandler (event){
 
 refs.form.addEventListener('submit', onSubmitHandler);
 
+
+
+// ЗБЕРІГАЮ ДАНІ В formData
+if (refs.email.value){
+    formData.email = refs.email.value;
+}
+
+if (refs.message.value){
+    formData.message = refs.message.value;
+}
+
+
 // При submit форми очищаю поля та сторедж
 function onSubmitHandler (event){
     console.log(formData);
@@ -45,17 +57,4 @@ function onSubmitHandler (event){
     if (localStorage.getItem(LOCAL_KEY)){
         localStorage.removeItem(LOCAL_KEY);
     }
-}
-
-
-// ЗБЕРІГАЮ ДАНІ В formData
-if (refs.email.value){
-    console.log(refs.email.value);
-    formData.email = refs.email.value;
-}
-
-if (refs.message.value){
-     console.log(refs.message.value);
-
-    formData.message = refs.message.value;
 }
